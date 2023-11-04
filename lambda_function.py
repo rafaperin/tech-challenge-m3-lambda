@@ -20,13 +20,13 @@ def authenticate_with_cpf(event, context) -> dict:
             conn_dict = psycopg.conninfo.conninfo_to_dict(pg_uri)
             with psycopg.connect(**conn_dict) as conn:
                 with conn.cursor() as cur:
-                    cur.execute(f"SELECT user_name FROM users WHERE cpf = '{json_body['cpf']}';")
+                    cur.execute(f"SELECT first_name FROM customers WHERE cpf = '{json_body['cpf']}';")
                     result = cur.fetchone()
             if result is None:
                 message = f"User with cpf {json_body['cpf']} not found"
                 jwt_token = None
             else:
-                message = "User authenticated successfully"
+                message = f"User {result[0]} authenticated successfully"
                 jwt_token = jwt.encode({"user_name": result[0]}, JWT_SECRET, algorithm=JWT_ALGORITHM)            
     else:
         message = "Authenticated as guest"
