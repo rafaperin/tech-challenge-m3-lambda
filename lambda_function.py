@@ -13,6 +13,7 @@ JWT_SECRET = os.environ.get("JWT_SECRET")
 JWT_ALGORITHM = os.environ.get("JWT_ALGORITHM")
 
 def authenticate_with_cpf(event, context) -> dict:
+    # test
     if 'body' in event:
         json_body = json.loads(event['body'])
         if 'cpf' in json_body:
