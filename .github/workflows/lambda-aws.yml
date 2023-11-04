@@ -35,7 +35,7 @@ jobs:
         AWS_REGION: us-east-1  # Change to your region
 
     - name: Deploy to Lambda
-      run: aws lambda create-function --function-name m3-authentication --runtime python3.10 --role arn:aws:iam::604623258149:role/service-role/cpf-authentication-role-pdgoh3d3 --handler lambda_function.authenticate_with_cpf --code S3Bucket=${{ secrets.AWS_S3_BUCKET }},S3Key=lambda_authentication.zip
+      run: aws lambda update-function-code --function-name m3-authentication --runtime python3.10 --role arn:aws:iam::604623258149:role/service-role/cpf-authentication-role-pdgoh3d3 --handler lambda_function.authenticate_with_cpf --code S3Bucket=${{ secrets.AWS_S3_BUCKET }},S3Key=lambda_authentication.zip
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
