@@ -35,35 +35,8 @@ jobs:
         AWS_REGION: us-east-1  # Change to your region
 
     - name: Deploy to Lambda
-      run: aws lambda create-function --function-name cpf-authentication --runtime python3.10 --role arn:aws:iam::604623258149:role/service-role/cpf-authentication-role-pdgoh3d3 --handler lambda_function.authenticate_with_cpf --code S3Bucket=lambda-m3-fiap,S3Key=lambda_authentication.zip
+      run: aws lambda create-function --function-name cpf-authentication --runtime python3.10 --role arn:aws:iam::604623258149:role/service-role/cpf-authentication-role-pdgoh3d3 --handler lambda_function.authenticate_with_cpf --code S3Bucket=${{ secrets.AWS_S3_BUCKET }},S3Key=lambda_authentication.zip
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: us-east-1  # Change to your region
-        
-# name: Deploy to AWS Lambda
-
-# on:
-#   push:
-#     branches:
-#       - master
-
-# jobs:
-#   deploy:
-#     name: Deploy
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v2
-
-#       - name: Configure AWS credentials
-#         uses: aws-actions/configure-aws-credentials@v1
-#         with:
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws-region: us-east-1
-
-#       - name: Deploy to Lambda
-#         run: |
-#           aws lambda create-function --function-name cpf-authentication --runtime python3.10 --role arn:aws:iam::604623258149:role/service-role/cpf-authentication-role-pdgoh3d3 --handler lambda_function.authenticate_with_cpf --code S3Bucket=lambda-m3-fiap,S3Key=lambda_authentication.zip
