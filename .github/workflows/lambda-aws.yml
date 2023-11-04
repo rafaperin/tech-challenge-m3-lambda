@@ -23,4 +23,4 @@ jobs:
 
       - name: Deploy to Lambda
         run: |
-          aws lambda create-function --function-name cpf-authentication --runtime python3.10 --role arn:aws:lambda:us-east-1:604623258149:function:cpf-authentication --handler lambda_function.authenticate_with_cpf --code S3Bucket=lambda-m3-fiap,S3Key=lambda_authentication.zip
+          aws lambda create-function --function-name cpf-authentication --runtime python3.10 --role arn:aws:iam::604623258149:role/service-role/cpf-authentication-role-pdgoh3d3 --handler lambda_function.authenticate_with_cpf --code S3Bucket=lambda-m3-fiap,S3Key=lambda_authentication.zip
