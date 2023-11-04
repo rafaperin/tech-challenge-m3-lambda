@@ -25,7 +25,7 @@ jobs:
       run: zip -r deployment-package.zip .
 
     - name: Upload to S3
-      uses: jakejarvis/s3-sync-action@v1
+      uses: jakejarvis/s3-sync-action@master
       with:
         args: --acl public-read
       env:
